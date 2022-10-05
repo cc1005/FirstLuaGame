@@ -1,30 +1,41 @@
 _G.love = require("love")
 
 function love.load()
-    love.graphics.setBackgroundColor(0.5, 0.5, 1)
+    love.graphics.setBackgroundColor(0.7, 0.2, 0.2)
 
-    _G.pacman = {}
-    pacman.x = 700
-    pacman.y = 400
-    pacman.eat = false
+    _G.pacman = {
+        x = 700,
+        y = 400
+    }
 
-    _G.food_x = 850
+    _G.food = {
+        x = 850,
+        eaten = false
+    }  
+    
 end
 
 function love.update(dt)
-    pacman.x = pacman.x + 1
     
-    if pacman.x == food_x + 20 then
-        pacman.eat = true
+    if love.keyboard.isDown("a") then
+        pacman.x = pacman.x - 1
+    elseif love.keyboard.isDown("d") then
+        pacman.x = pacman.x + 1
+    end
+    
+
+
+    if pacman.x == food.x + 20 then
+        food.eaten = true
     end
 
 end
 
 function love.draw()
     
-    if not pacman.eat then
-        love.graphics.setColor(1, 0, 0)
-        love.graphics.rectangle("fill", food_x, 370, 50, 50)    
+    if not food.eaten then
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle("fill", food.x, 370, 50, 50)    
     end
 
 
